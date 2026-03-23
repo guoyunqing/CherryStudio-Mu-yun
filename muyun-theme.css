@@ -1,0 +1,166 @@
+/*
+================================================================
+  暮云主题 (Mu-yun Theme) - muyun-theme.css
+================================================================
+  主题名称：暮云 (Mu-yun) - 暮色苍穹
+  文件名：muyun-theme.css
+  设计理念：
+    灵感源于黄昏时分暮云渐收的静谧之美，以优雅的黑灰紫
+    配色呈现。深沉的靛蓝与柔和的紫色交织，唤起昼夜交替
+    之际天空成为光影与微妙色彩画布的那一瞬间。
+
+  配色特点：
+    - 深色模式：极深蓝黑背景 (#0F1218) + 荧光感蓝紫强调色
+    - 浅色模式：柔和白灰背景 (#F7F8FC) + 明亮蓝紫强调色
+    - 强调色：#818CF8 (Dark) / #6366F1 (Light)
+
+  字体栈：
+    - Dark: Inter + Noto Sans SC
+    - Light: Zen Maru Gothic + LXGW WenKai Screen
+    - Code: JetBrains Mono
+
+  引用诗句：
+    「暮云收尽溢清寒，银汉无声转玉盘。」—— 苏轼《阳关曲·中秋作》
+================================================================
+*/
+
+/* ===== Font Imports =====
+ * 字体加载策略：
+ * 1. Inter: 西文无衬线主字体
+ * 2. Noto Sans SC: 中文无衬线备用
+ * 3. Noto Serif SC: 中文衬线（标题/引用）
+ * 4. Zen Maru Gothic: 日式圆体（Light 模式）
+ * 5. LXGW WenKai: 霞鹜文楷（中文阅读优化）
+ * 6. JetBrains Mono: 代码等宽字体
+ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
+@import url('https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ============================================
+   ROOT VARIABLES - CSS 变量定义
+   ============================================
+   命名规范：
+   - color-*: 颜色变量
+     - soft: 柔和/淡化版本
+     - mute: 更淡的背景级
+     - primary: 主题强调色
+   - spacing-*: 间距
+   - font-*: 字体族
+   ============================================ */
+:root {
+    /* 基础色板 - 中性色 */
+    --color-white-soft: #E8ECFF;   /* 极淡蓝白 - 用于深色模式文字 */
+    --color-black-soft: #1E2433;   /* 深蓝黑 - 用于浅色模式文字 */
+
+    /* 主题强调色 - 蓝紫渐变系
+     * 选择 #818CF8 的原因：
+     * 1. 位于蓝紫交界，既有科技感又不失优雅
+     * 2. 饱和度适中，长时间阅读不易疲劳
+     * 3. 在深色/浅色背景下都有良好的对比度
+     */
+    --color-primary: #818CF8;                     /* 主色调 - 蓝紫 */
+    --color-primary-soft: rgba(129, 140, 248, 0.6); /* 柔和版 - 用于hover状态 */
+    --color-primary-mute: rgba(129, 140, 248, 0.2); /* 淡化版 - 用于背景、边框 */
+}
+
+/* ============================================
+   DARK MODE - 深色模式
+   ============================================
+   设计理念：
+   - 背景采用极深蓝黑 (#0F1218)，模拟夜幕降临
+   - 强调色保持蓝紫，在深色背景下呈现荧光般的效果
+   - 文字使用极淡蓝白 (#E8ECFF)，减少眼睛疲劳
+   - 边框和分割线使用半透明的主色调，保持视觉层次
+   ============================================ */
+body[theme-mode="dark"] {
+    --color-background: #0F1218;
+    --color-background-mute: #1A202C;
+    --color-background-soft: #252D3C;
+
+    --navbar-background-mac: rgba(15, 18, 24, 0.85);
+    --navbar-background: #0F1218;
+    --chat-background: #0F1218;
+    --chat-background-user: #252D3C;
+    --chat-background-assistant: #1A202C;
+
+    --chat-text-user: #E8ECFF;
+    --color-text: #E8ECFF;
+
+    --color-hover: rgba(129, 140, 248, 0.12);
+    --color-active: rgba(129, 140, 248, 0.18);
+
+    --color-border: rgba(129, 140, 248, 0.2);
+    --color-border-soft: rgba(129, 140, 248, 0.09);
+
+    --font-family:        'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+    --font-family-serif:  'Noto Serif SC', 'LXGW WenKai Screen', serif;
+    --code-font-family:   'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ============================================
+   LIGHT MODE - 浅色模式
+   ============================================
+   设计理念：
+   - 背景使用柔和的白灰色 (#F7F8FC)，避免纯白带来的刺眼感
+   - 浅色模式下主色调调整为更深的蓝紫 (#6366F1)，确保对比度
+   - 文字使用深蓝黑 (#1E2433)，保证可读性
+   - 字体切换为更圆润的 Zen Maru Gothic + 霞鹜文楷组合，营造温馨感
+   ============================================ */
+body[theme-mode="light"] {
+    /* Primary color (accent color) and variants - 蓝紫 */
+    --color-primary: #6366F1;
+    --color-primary-soft: rgba(99, 102, 241, 0.6);
+    --color-primary-mute: rgba(99, 102, 241, 0.2);
+
+    --color-background: #F7F8FC;
+    --color-background-mute: #E4E7EF;
+    --color-background-soft: #EEF0F6;
+
+    --navbar-background: #F2F4F9;
+    --chat-background: #F7F8FC;
+    --chat-background-user: #EEF0F6;
+    --chat-background-assistant: #F7F8FC;
+
+    --color-text: #1E2433;
+
+    --color-hover: rgba(99, 102, 241, 0.08);
+    --color-active: rgba(99, 102, 241, 0.14);
+
+    --color-border: rgba(99, 102, 241, 0.18);
+    --color-border-soft: rgba(99, 102, 241, 0.08);
+
+    --color-white: #F7F8FC;
+
+    --font-family:        'Zen Maru Gothic', 'LXGW WenKai Screen', 'Noto Sans SC', system-ui, sans-serif;
+    --font-family-serif:  'Noto Serif SC', 'LXGW WenKai Screen', serif;
+    --code-font-family:   'JetBrains Mono', monospace;
+}
+
+/* ============================================
+   BUG FIXES & OVERRIDES - 修复与覆盖
+   ============================================
+   说明：
+   - 此区域用于放置对第三方组件库的样式覆盖
+   - 使用 !important 仅作为最后手段，优先尝试增加选择器特异性
+   - 每个修复都应说明其解决的问题
+   ============================================ */
+
+/* 修复：用户消息操作按钮的悬停背景色 */
+.bubble .message-user .message-action-button:hover {
+  background-color: var(--color-background-mute);
+}
+
+/* 修复：列表项背景色在深浅模式下保持一致
+ * 问题：某些列表组件在不同主题下显示不一致的背景色
+ * 解决：强制使用统一的背景变量
+ */
+body[theme-mode="dark"]{
+    --color-list-item: var(--color-background-soft) !important;
+    --color-list-item-hover: var(--color-background-soft) !important;
+}
+
+body[theme-mode="light"]{
+    --color-list-item: var(--color-background-soft) !important;
+    --color-list-item-hover: var(--color-background-soft) !important;
+}
